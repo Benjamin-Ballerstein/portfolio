@@ -1,0 +1,39 @@
+
+body {
+    font-family: 'Albert Sans', Arial, Helvetica, sans-serif;
+    max-width: 900px;
+    margin: 40px auto;
+}
+canvas {
+    max-width: 100%;
+}
+h2 {
+    color: #7653FF;
+}
+html {
+    margin-left: 20px;
+}
+.citation {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 2rem;
+}
+#source {
+    font-weight: bold;
+}
+.source-link {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+.source-link a {
+  color: #555;
+  text-decoration: underline;
+}
+blockquote {
+  font-style: italic;
+  color: #555;
+  border-left: 4px solid #ccc;
+  padding: 0.5rem 1rem;
+  margin: 1.5rem 0;
+  background: #f9f9f9;
+}

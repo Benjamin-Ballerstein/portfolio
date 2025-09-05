@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>CO₂ Emissions Per Capita</title>
+</head>
+<body>
+  <h1>CO₂ Emissions Per Capita</h1>
+ <p class="subheading">
+  Carbon dioxide (CO₂) emissions from burning fossil fuels and industrial processes. This includes emissions from transport, electricity generation, and heating, but not land-use change.
+</p>
+<br>
+  <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+    <canvas id="myChart"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.0/dist/chartjs-plugin-annotation.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="main.js"></script>
+  <p class="citation">
+  <span id="source">Data sources:</span> Global Carbon Budget (2024), Population based on various sources (2024) – with major processing by Our World in Data
+</p>
+<p class="source-link">
+<a href="https://ourworldindata.org/grapher/co-emissions-per-capita?country=~USA#explore-the-data" target="_blank" rel="noopener noreferrer">
+    View original data source at Our World in Data
+</a>
+</p>
+
+</body>
+</html>
