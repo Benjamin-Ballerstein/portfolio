@@ -1,0 +1,378 @@
+
+body {
+margin: 0;
+font-family: 'Open Sans', sans-serif;
+background-color: black;
+color: white;
+}
+
+.title-block {
+text-align: start;
+justify-self: left;
+color: white;
+}
+
+/* .profile-link {
+justify-self: end;
+text-align: right;
+} */
+
+h1 {
+font-family: 'Anton', sans-serif;
+font-size: 2.3rem;
+margin: 0;
+background: linear-gradient(90deg, limegreen, deepskyblue); /* Pink to Blue gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+h2 {
+margin: 0.5rem 0 0;
+font-weight: 400;
+font-size: 1rem;
+}
+
+/* Main visualization area */
+#main-viz {
+display: grid;
+grid-template-columns: 300px 1fr 300px;
+gap: 1rem;
+padding: 0rem 2rem;
+align-items: stretch;
+}
+
+#search-box {
+  display: block;
+  width: 100%;               /* ensure full width */
+  box-sizing: border-box;    /* account for padding & border */
+  margin-bottom: 10px;
+  padding: 6px 8px;
+  border: 1px solid #444;
+  background: #222;
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+#search-box:focus {
+  background: #333;
+  outline: none;
+}
+
+#minifig-table {
+max-height: 70vh;
+width: 100%;
+font-size: 12px;
+overflow-y: auto;
+overflow-x: hidden;
+direction: rtl;
+text-align: left;
+white-space: nowrap;
+text-overflow: ellipsis;
+position: relative;
+z-index: 1;
+}
+
+#minifig-table > * {
+    direction: ltr;
+}
+
+#minifig-table table {
+width: 100%;
+border-collapse: collapse;
+}
+
+#minifig-table td {
+padding: 6px;
+border-bottom: 1px solid #333;
+cursor: pointer;
+}
+
+#minifig-table td:hover {
+background: #333;
+}
+
+#minifig-table::-webkit-scrollbar {
+width: 8px;
+}
+
+#minifig-table::-webkit-scrollbar-track {
+background: #111; /* background */
+}
+
+#minifig-table::-webkit-scrollbar-thumb {
+background: #444; /* handle */
+border-radius: 4px;
+}
+
+/* Graph in center */
+#graph-container {
+position: relative;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: flex-start;
+width: 100%;
+height: 100%;
+overflow: hidden; /* ensures no cropping */
+}
+
+#3d-graph {
+  width: 100%;
+  height: 100%;
+  background: black;
+}
+
+
+#toggle-rotate {
+position: absolute;
+bottom: 60px;
+right: 20px;
+background: rgba(0, 0, 0, 0.8);
+border: 1px solid #444;
+color: white;
+padding-left: 15px;
+padding-right: 15px;
+padding-top: 5px;
+padding-bottom: 5px;
+border-radius: 20px;
+cursor: pointer;
+font-size: 0.9rem;
+z-index: 10000;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+transition: background-color 0.2s;
+}
+
+#toggle-rotate:hover {
+background-color: white;
+color: black;
+}
+
+/* Zoom controls */
+.zoom-controls {
+position: absolute;
+bottom: 60px;
+left: 20px;
+padding: 8px 12px;
+border-radius: 6px;
+z-index: 1000;
+display: flex;
+align-items: center;
+gap: 8px;
+accent-color: limegreen;
+font-size: 0.9rem;
+}
+
+#zoom-slider {
+width: 100px;
+cursor: pointer;
+}
+
+/* Two data tables side by side */
+#bottom-tables {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1rem;
+padding: 1rem 2rem;
+}
+
+.datatable {
+min-height: 200px;
+background: black;
+}
+
+/* Footer disclaimers */
+footer {
+padding: 2rem;
+font-size: 0.85rem;
+text-align: left;
+color: #bbb;
+}
+
+a {
+color: limegreen;
+text-decoration: none;
+}
+
+a:hover {
+color: #90EE90; /* Lighter green on hover */
+text-decoration: underline;
+}
+
+#associate-chart {
+max-height: 80vh;
+overflow-y: auto;
+overflow-x: hidden;
+padding: 0.5rem;
+}
+
+#associate-chart text {
+font-size: 12px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+#associate-chart::-webkit-scrollbar {
+width: 8px;
+}
+
+#associate-chart::-webkit-scrollbar-track {
+background: #111; /* background */
+}
+
+#associate-chart::-webkit-scrollbar-thumb {
+background: #444; /* handle */
+border-radius: 4px;
+}
+
+/* Welcome text styling */
+.welcome-text {
+line-height: 1.6;
+font-size: 12px;
+color: white;
+}
+
+.welcome-text p {
+margin-bottom: 1rem;
+text-align: center;
+}
+
+.welcome-text p:last-child {
+margin-bottom: 0;
+font-weight: bold;
+color: white;
+}
+
+.welcome-text strong {
+color: white;
+font-weight: bold;
+}
+
+/* .bar-label {
+fill: white;
+font-size: 12px;
+alignment-baseline: middle;
+} */
+
+#tempBar {
+justify-content: end;
+}
+
+.axis text {
+fill: #ccc;
+font-size: 12px;
+}
+.axis path,
+.axis line {
+stroke: #666;
+}
+
+#legend {
+  justify-self: center;       /* aligns it to the right within its grid cell */
+  text-align: center;       /* aligns text inside the container */
+  margin-right: -20px;      
+}
+
+
+#Assoc {
+text-align: center;
+}
+
+/* Selected minifigure overlay */
+.minifig-overlay {
+position: absolute;
+top: 20px;
+display: flex;
+align-items: center;
+gap: 0.3rem;
+background: linear-gradient(220deg, limegreen 0%, #90EE90 100%);
+padding: 0.3rem 0.5rem;
+border-radius: 20px;
+border: 1px solid black;
+z-index: 1000;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.minifig-overlay h4 {
+margin: 0;
+font-size: 1rem;
+font-weight: 600;
+color: black;
+}
+
+#set-list-panel {
+  padding-top: 10px;
+  padding-left: 10px;
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#set-list-panel::-webkit-scrollbar {
+  width: 8px;
+  }
+  
+#set-list-panel::-webkit-scrollbar-track {
+background: #111; /* background */
+}
+
+#set-list-panel::-webkit-scrollbar-thumb {
+background: #444; /* handle */
+border-radius: 4px;
+}
+
+.reset-btn {
+background: transparent;
+border: none;
+color: black;
+font-size: 1.2rem;
+cursor: pointer;
+padding: 0.2rem 0.4rem;
+width: auto;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 12px;
+transition: background-color 0.2s;
+}
+
+.reset-btn:hover {
+background: rgba(0, 0, 0, 0.1);
+}
+
+#left-panel {
+  width: 100%;               /* fill its grid column */
+  box-sizing: border-box;    /* include padding in width calc */
+  overflow-x: hidden;        /* no horizontal scroll */
+  overflow-y: hidden;        /* prevent vertical overflow */
+  max-height: 100vh;         /* limit height to viewport */
+}
+
+#right-panel {
+    padding-right: 0px;
+}
+
+#left-panel,
+#right-panel {
+display: flex;
+padding-top: 20px;
+flex-direction: column;
+/* order: 1; */
+}
+
+@media (max-width: 768px) {
+#main-viz {
+    grid-template-columns: 1fr; /* stack panels */
+    grid-template-rows: auto 70vh auto;
+}
+
+#graph-container {
+    order: 0;
+    height: 70vh;
+}
+
+}
+

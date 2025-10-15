@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LEGO STAR WARS MINIFIGURE NETWORK</title>
+
+    <!-- Stylesheets -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=OpenSans&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0&icon_names=play_pause"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Data Viz Libraries -->
+    <!-- Three.js (older stable version) -->
+    <script src="https://unpkg.com/three@0.126.1/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.126.1/examples/js/loaders/OBJLoader.js"></script>
+    
+    <!-- SpriteText (compatible with Three 0.126.x) -->
+    <script src="https://unpkg.com/three-spritetext@1.0.6/dist/three-spritetext.min.js"></script>
+    <!-- 3d-force-graph (older build that uses the same Three) -->
+    <script src="https://unpkg.com/3d-force-graph@1.70.9/dist/3d-force-graph.min.js"></script>
+    <!-- d3 library-->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+
+    <script src="script.js"></script>
+    
+  </head>
+
+  <body>
+    <div id="main-viz">
+      <!-- LEFT PANEL -->
+      <div id="left-panel">
+        <div class="title-block">
+          <h1>A GALAXY OF MINIFIGS</h1>
+          <h2>
+            Exploring co-appearances of LEGO Star Wars minifigures across sets
+          </h2>
+        </div>
+        <h3 class="panel-title">Star Wars Minifigures</h3>
+        <input type="text" id="search-box" placeholder="Search minifigure..." />
+        <div id="minifig-table" class="scrollable"></div>
+        <div id="set-list-panel"></div>
+      </div>
+
+      <!-- CENTER PANEL -->
+      <div id="graph-container">
+        <div id="3d-graph"></div>
+        <div id="selected-minifig-overlay" class="minifig-overlay" style="display: none;">
+          <h4 id="selected-minifig-name"></h4>
+          <button id="reset-button" class="reset-btn">×</button>
+        </div>
+        <div id="zoom-controls" class="zoom-controls">
+          <label for="zoom-slider"></label>
+          <input type="range" id="zoom-slider" min="0.5" max="4" step="0.1" value="2">
+        </div>
+        <button id="toggle-rotate">
+          <span class="material-symbols-outlined"> play_pause </span>
+        </button>
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div id="right-panel">
+        <div id="legend"></div>
+        <h3 class="panel-title" id="Assoc">Top Associates</h3>
+
+        <div id="associate-chart" class="scrollable">
+          <p id="tempBar">
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        <strong>Data:</strong> <a href="https://rebrickable.com" target="_blank">Rebrickable</a> (current as of September 2025)<br />
+        <strong>Processing:</strong> Python<br />
+        <strong>Visualization:</strong> D3.js, Three.js, 3d-force-graph<br />
+        <strong>Data Note:</strong> This visualization represents a sample of available data and may not include every LEGO Star Wars set or minifigure.<br />
+        <strong>Legal Notice:</strong> This is a fan-made, non-commercial project for educational purposes only. LEGO®, Star Wars™, and all related trademarks are property of The LEGO Group, Lucasfilm Ltd., and Disney. This project is not affiliated with, endorsed by, or sponsored by these companies. Commercial use is strictly prohibited.<br />
+        <strong>Data Source:</strong> Data from <a href="https://rebrickable.com" target="_blank">Rebrickable</a> used under fair use principles for non-commercial purposes only.<br />
+        <strong>Creator:</strong> <a href="https://www.linkedin.com/in/bballerstein" target="_blank">LinkedIn</a>
+      </p>
+    </footer>
+  </body>
+</html>
