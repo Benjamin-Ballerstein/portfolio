@@ -15,16 +15,67 @@ fetch("data/lego_starwars_graph_v2.json") //fetch returns a response object
 
 // --- LOAD STUD MODEL ---
     let studModel = null;
+    let graphInitialized = false;
+
+    // Show loading indicator
+    const loadingDiv = document.createElement('div');
+    loadingDiv.id = 'loading-indicator';
+    loadingDiv.style.cssText = `
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 20px 40px;
+      border-radius: 8px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 16px;
+      z-index: 1000;
+      text-align: center;
+    `;
+    loadingDiv.innerHTML = `
+      <div style="margin-bottom: 10px;">Loading LEGO Minifigure Network...</div>
+      <div style="font-size: 14px; color: #ccc;">Preparing 3D models and data</div>
+    `;
+    document.body.appendChild(loadingDiv);
 
     const objLoader = new THREE.OBJLoader();
     objLoader.load(
     "models/stud2.obj",
     (obj) => {
         studModel = obj;
+        console.log("Stud model loaded successfully");
+        
+        // Initialize graph only after stud model is loaded
+        if (!graphInitialized) {
+            initializeGraph(graphData);
+            graphInitialized = true;
+            
+            // Remove loading indicator
+            if (loadingDiv.parentNode) {
+                loadingDiv.parentNode.removeChild(loadingDiv);
+            }
+        }
     },
     undefined,
-    (err) => console.error("Error loading stud.obj", err)
+    (err) => {
+        console.error("Error loading stud.obj", err);
+        // Still initialize graph even if stud model fails
+        if (!graphInitialized) {
+            initializeGraph(graphData);
+            graphInitialized = true;
+            
+            // Remove loading indicator
+            if (loadingDiv.parentNode) {
+                loadingDiv.parentNode.removeChild(loadingDiv);
+            }
+        }
+    }
     );
+
+    // Function to initialize the graph (moved from main flow)
+    function initializeGraph(graphData) {
 
     searchBox = document.getElementById("search-box");
 
@@ -896,6 +947,8 @@ fetch("data/lego_starwars_graph_v2.json") //fetch returns a response object
           return commonSets.has(setNum) ? "bold" : "normal";
         });
     }
+    
+    } // End of initializeGraph function
   })
   .catch((error) => {
     console.error('Failed to load graph data:', error);
