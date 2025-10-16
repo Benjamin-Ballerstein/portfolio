@@ -725,7 +725,7 @@ fetch("data/lego_starwars_graph_v2.json") //fetch returns a response object
             
             <p>You can select a minifigure on the right to highlight that connection as well as to highlight the sets that the two have in common below the minifigure name in the left panel.</p>
             
-            <p>Have fun exploring the network. Connect on LinkedIn at <a href="https://www.linkedin.com/in/bballerstein" target="_blank">linkedin.com/in/bballerstein</a> with any questions or suggestions for improvement.</p>
+            <p>Have fun exploring the network. Connect on GitHub at <a href="https://github.com/Benjamin-Ballerstein" target="_blank">github.com/Benjamin-Ballerstein</a> with any questions or suggestions for improvement.</p>
             
             <p><strong>Ben</strong></p>
           `);
