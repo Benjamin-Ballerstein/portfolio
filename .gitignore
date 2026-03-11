@@ -1,6 +1,4 @@
 /projects/halfsphereviz
-
-# Un-ignore runtime data files needed by the app
 !data/
 !data/centerlinesFinalTopo.json
 !data/crashesFinal.geojson
