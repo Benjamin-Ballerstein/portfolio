@@ -87,13 +87,17 @@ print()
 # ── Day of week ────────────────────────────────────────────────────────────────
 print("── Day of Week ───────────────────────────────────────────────")
 DOW_NAMES = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+EDT_START_DOW = datetime(2025, 3, 9, 7, 0, 0, tzinfo=timezone.utc)
+EDT_END_DOW   = datetime(2025, 11, 2, 6, 0, 0, tzinfo=timezone.utc)
 dow_groups = defaultdict(list)
 for c in crashes:
     rd = c.get('REPORTDATE', '')
     if rd:
         try:
-            dt = datetime.fromisoformat(rd.replace('Z', '+00:00'))
-            dow_groups[dt.weekday()].append(c)
+            utc_dt = datetime.fromisoformat(rd.replace('Z', '+00:00'))
+            offset = timedelta(hours=-4) if EDT_START_DOW <= utc_dt < EDT_END_DOW else timedelta(hours=-5)
+            local_dt = utc_dt + offset
+            dow_groups[local_dt.weekday()].append(c)
         except (ValueError, AttributeError):
             pass
 
