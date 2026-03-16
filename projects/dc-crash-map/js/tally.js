@@ -344,7 +344,7 @@ function refreshMonthlyBars() {
 // ─── Tally: reset ─────────────────────────────────────────────────────────────
 function resetTally() {
   crashCount = 0;
-  if (crashNumEl) crashNumEl.textContent = '0';
+  if (crashNumEl) crashNumEl.textContent = '';
 
   VEHICLE_FIELDS.forEach(f    => { tallyVehicle[f.key]  = 0; });
   LANE_CATEGORIES.forEach(g   => { tallyLane[g.key]     = 0; });

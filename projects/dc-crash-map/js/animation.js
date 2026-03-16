@@ -83,7 +83,7 @@ function wireControls() {
   });
 
   skipTextEl.addEventListener('click', skipToEnd);
-  document.getElementById('gap-btn').addEventListener('click', toggleGapMode);
+  document.getElementById('gap-check').addEventListener('change', toggleGapMode);
 
   map.on('click', e => {
     if (!e.defaultPrevented && activeFilter) clearActiveFilter();
@@ -174,7 +174,7 @@ function replay() {
     pinsVisible = false;
     map.setLayoutProperty('crash-circles', 'visibility', 'none');
     map.setPaintProperty('crash-circles', 'circle-opacity', 0);
-    document.getElementById('pins-btn').textContent = 'Show Collisions';
+    document.getElementById('pins-check').checked = false;
     document.getElementById('pins-legend').classList.remove('visible');
   }
   play();
@@ -199,7 +199,7 @@ function onAnimationEnd() {
     pinsVisible = true;
     map.setLayoutProperty('crash-circles', 'visibility', 'visible');
     map.setPaintProperty('crash-circles', 'circle-opacity', 0.7);
-    document.getElementById('pins-btn').textContent = 'Hide Collisions';
+    document.getElementById('pins-check').checked = true;
     document.getElementById('pins-legend').classList.add('visible');
   }
 }

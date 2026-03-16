@@ -113,7 +113,7 @@ function toggleGapMode() {
     map.setPaintProperty('centerlines-layer', 'line-width',   baseWidth);
   }
 
-  document.getElementById('gap-btn').textContent = gapModeActive ? 'Hide Bike Lanes' : 'Show Bike Lanes';
+  document.getElementById('gap-check').checked = gapModeActive;
 }
 
 // ─── Route search ─────────────────────────────────────────────────────────────
@@ -130,7 +130,7 @@ function initRouteSearch() {
     if (!pinsVisible) {
       pinsVisible = true;
       map.setLayoutProperty('crash-circles', 'visibility', 'visible');
-      document.getElementById('pins-btn').textContent = 'Hide Collisions';
+      document.getElementById('pins-check').checked = true;
       document.getElementById('pins-legend').classList.add('visible');
     }
     map.setFilter('crash-circles',
@@ -235,12 +235,11 @@ function initCrashPins() {
     }
   });
 
-  document.getElementById('pins-btn').addEventListener('click', () => {
+  document.getElementById('pins-check').addEventListener('change', e => {
     if (!map.getLayer('crash-circles')) return;
-    pinsVisible = !pinsVisible;
+    pinsVisible = e.target.checked;
     map.setLayoutProperty('crash-circles', 'visibility', pinsVisible ? 'visible' : 'none');
     map.setPaintProperty('crash-circles', 'circle-opacity', pinsVisible ? 0.7 : 0);
-    document.getElementById('pins-btn').textContent = pinsVisible ? 'Hide Collisions' : 'Show Collisions';
     document.getElementById('pins-legend').classList.toggle('visible', pinsVisible);
   });
 

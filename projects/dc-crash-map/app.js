@@ -1,4 +1,5 @@
 // ─── Map ──────────────────────────────────────────────────────────────────────
+const isMobile = window.innerWidth <= 768;
 const map = new maplibregl.Map({
   container: 'map',
   style: {
@@ -8,7 +9,11 @@ const map = new maplibregl.Map({
     layers: [{ id: 'background', type: 'background', paint: { 'background-color': '#111111' } }]
   },
   bounds: DC_BOUNDS,
-  fitBoundsOptions: { padding: { top: 40, bottom: 100, left: 200, right: 40 } },
+  fitBoundsOptions: {
+    padding: isMobile
+      ? { top: 30, bottom: 50, left: 20, right: 20 }
+      : { top: 40, bottom: 100, left: 200, right: 40 }
+  },
   bearing: 0,
   pitch: 0,
   attributionControl: true

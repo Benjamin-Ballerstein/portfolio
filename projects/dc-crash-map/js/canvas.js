@@ -1,7 +1,7 @@
 // ─── Canvas sizing ────────────────────────────────────────────────────────────
 function resizeCanvas() {
-  canvas.width  = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width  = canvas.offsetWidth  || window.innerWidth;
+  canvas.height = canvas.offsetHeight || window.innerHeight;
 }
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();

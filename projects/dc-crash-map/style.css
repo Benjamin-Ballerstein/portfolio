@@ -83,6 +83,15 @@ html, body {
   min-width: 2.2em;
 }
 
+#title-desc #crash-num:empty {
+  min-width: 0;
+}
+
+#title-desc b {
+  color: rgba(232, 178, 0, 0.9);
+  font-weight: 600;
+}
+
 
 /* ─── Playback controls — scrub bar ─────────────────── */
 #playback-controls {
@@ -363,24 +372,6 @@ html, body {
   pointer-events: all;
 }
 
-#pins-btn {
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-  font-family: 'Inter', system-ui, sans-serif;
-  font-weight: 300;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 5px 13px;
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-
-#pins-btn:hover {
-  border-color: rgba(255, 255, 255, 0.75);
-}
-
 /* ─── Infrastructure gap toggle ─────────────────────── */
 #gap-toggle {
   display: flex;
@@ -390,23 +381,59 @@ html, body {
   pointer-events: all;
 }
 
-#gap-btn {
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
+/* ─── Toggle switch ──────────────────────────────────── */
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.toggle-label input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-track {
+  display: inline-block;
+  width: 32px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9px;
+  position: relative;
+  transition: background 0.25s;
+  flex-shrink: 0;
+}
+
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transition: transform 0.25s, background 0.25s;
+}
+
+.toggle-label input:checked + .toggle-track {
+  background: rgba(232, 178, 0, 0.45);
+}
+
+.toggle-label input:checked + .toggle-track::after {
+  transform: translateX(14px);
+  background: rgba(232, 178, 0, 1);
+}
+
+.toggle-text {
   font-family: 'Inter', system-ui, sans-serif;
   font-weight: 300;
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 5px 13px;
-  cursor: pointer;
-  transition: border-color 0.2s;
+  color: #ffffff;
   white-space: nowrap;
-}
-
-#gap-btn:hover {
-  border-color: rgba(255, 255, 255, 0.75);
 }
 
 #bikelane-legend {
@@ -431,30 +458,124 @@ html, body {
   display: flex;
 }
 
-/* ─── Mobile fallback ────────────────────────────────── */
-#mobile-fallback {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: #111111;
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 32px;
-  font-size: 14px;
-  line-height: 1.6;
-  letter-spacing: 0.06em;
-}
+/* ─── Mobile fallback (unused) ───────────────────────── */
+#mobile-fallback { display: none; }
 
+/* ─── Mobile layout ──────────────────────────────────── */
 @media (max-width: 768px) {
-  #mobile-fallback {
-    display: flex;
+  /* Page becomes scrollable */
+  html, body {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
-  #map, #crash-canvas, #title-header, #bottom-hud,
-  #tally-panel, #playback-controls, #methods-toggle, #route-search {
-    display: none !important;
+
+  /* ── Section 1: Title (sticky) ── */
+  #title-header {
+    position: sticky;
+    top: 0;
+    left: auto;
+    z-index: 30;
+    background: #111111;
+    padding: 16px 20px;
+    pointer-events: all;
   }
+  #title-desc { max-width: 100%; }
+  #title-desc #crash-num {
+    display: block;
+    text-align: left;
+    font-size: 18px;
+    min-width: 0;
+    margin-bottom: 2px;
+  }
+
+  /* ── Section 2: Map ── */
+  #map-section {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+  }
+  #map {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  #crash-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  #playback-controls {
+    position: absolute;
+    top: auto;
+    bottom: 12px;
+    left: 16px;
+    right: 16px;
+    width: auto;
+  }
+
+  /* ── Section 3: HUD buttons ── */
+  #bottom-hud {
+    position: relative;
+    bottom: auto; left: auto;
+    transform: none;
+    padding: 16px 20px;
+    justify-content: center;
+    white-space: normal;
+  }
+
+  /* ── Section 4: Tally panel ── */
+  #tally-panel {
+    position: relative;
+    bottom: auto; left: auto;
+    pointer-events: all;
+    width: 100%;
+    padding: 20px 20px 8px;
+  }
+  /* 2-column layout — keep flex-direction: row, make cols equal width */
+  .tally-cols-row {
+    flex-direction: row;
+    gap: 16px;
+    flex-wrap: nowrap;
+  }
+  .tally-cols-row .tally-col {
+    flex: 1;
+    min-width: 0;
+  }
+  .tally-cols-row .tally-col:last-child {
+    width: auto;
+    flex: 1;
+  }
+  /* Bar tracks stretch to fill column */
+  .bar-label {
+    width: 60px;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    width: auto;
+  }
+
+  /* ── Section 5: Notations ── */
+  #methods-toggle {
+    position: relative !important;
+    bottom: auto !important; right: auto !important;
+    width: 100% !important;
+    padding: 20px 20px 48px;
+    margin-top: 32px;
+    pointer-events: all !important;
+    z-index: 0;
+  }
+  #methods-body {
+    font-size: 12px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* ── Hide desktop-only elements ── */
+  #route-search { display: none; }
 }
 
 /* ─── Crash detail popup ──────────────────────────────── */

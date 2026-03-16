@@ -11,12 +11,6 @@
 </head>
 <body>
 
-  <!-- Map container -->
-  <div id="map"></div>
-
-  <!-- Canvas overlay for crash effects (Phase 4+) -->
-  <canvas id="crash-canvas"></canvas>
-
   <!-- Title -->
   <header id="title-header">
     <h1>
@@ -31,46 +25,60 @@
         <line x1="27" y1="9"  x2="33" y2="9"  stroke="rgba(232,178,0,0.9)" stroke-width="2" stroke-linecap="round"/>
       </svg>DC BICYCLE COLLISION MAP 2025
     </h1>
-    <p id="title-desc"><span id="crash-num">0</span> police-reported bicycle collisions in Washington DC in 2025, mapped to the road network. Roads brighten where incidents cluster. Source: DC Open Data.</p>
+    <p id="title-desc"><span id="crash-num"></span> Police-reported bicycle collisions in Washington DC in 2025, mapped to the road network. <b>Press play</b> to brighten the roads where incidents cluster. Source: DC Open Data.</p>
   </header>
 
-  <!-- Route search — top right -->
+  <!-- Map section: map + canvas + playback controls (desktop: fixed/invisible wrapper; mobile: 60vh block) -->
+  <div id="map-section">
+    <div id="map"></div>
+    <canvas id="crash-canvas"></canvas>
+
+    <!-- Playback controls — scrub bar -->
+    <div id="playback-controls">
+      <div id="scrub-wrap">
+        <div id="date-display"></div>
+        <input type="range" id="scrub-bar" min="0" max="30000" value="0" step="1">
+      </div>
+      <div id="controls-row">
+        <button id="play-btn" aria-label="Play / Pause">
+          <span class="material-symbols-outlined" id="play-icon">play_pause</span>
+        </button>
+        <div id="skip-text">Skip animation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Route search — top right (desktop only) -->
   <div id="route-search">
     <input id="route-input" type="text" placeholder="Search road…" autocomplete="off" spellcheck="false">
     <ul id="route-suggestions"></ul>
   </div>
 
-  <!-- Tally panel — bottom left (Phase 7) -->
-  <div id="tally-panel" class="hidden"></div>
-
-  <!-- Playback controls — scrub bar -->
-  <div id="playback-controls">
-    <div id="scrub-wrap">
-      <div id="date-display"></div>
-      <input type="range" id="scrub-bar" min="0" max="30000" value="0" step="1">
-    </div>
-    <div id="controls-row">
-      <button id="play-btn" aria-label="Play / Pause">
-        <span class="material-symbols-outlined" id="play-icon">play_pause</span>
-      </button>
-      <div id="skip-text">Skip animation</div>
-    </div>
-  </div>
-
-  <!-- Bottom-center HUD: streetmap + collision toggles -->
+  <!-- Bottom-center HUD: collision + bike lane toggles -->
   <div id="bottom-hud">
-<div id="pins-toggle">
-      <button id="pins-btn">Show Collisions</button>
+    <div id="pins-toggle">
+      <label class="toggle-label" for="pins-check">
+        <input type="checkbox" id="pins-check">
+        <span class="toggle-track"></span>
+        <span class="toggle-text">Collisions</span>
+      </label>
       <div id="pins-legend">
         <div class="hin-lrow"><span class="hin-dot" style="background:rgba(255,255,255,0.7)"></span>Collision</div>
       </div>
     </div>
     <div id="gap-toggle">
-      <button id="gap-btn">Show Bike Lanes</button>
+      <label class="toggle-label" for="gap-check">
+        <input type="checkbox" id="gap-check">
+        <span class="toggle-track"></span>
+        <span class="toggle-text">Bike Lanes</span>
+      </label>
     </div>
   </div>
 
-  <!-- Methods / notation panel — bottom right -->
+  <!-- Tally panel — bottom left (desktop) / below buttons (mobile) -->
+  <div id="tally-panel" class="hidden"></div>
+
+  <!-- Methods / notation panel — bottom right (desktop) / below stats (mobile) -->
   <div id="methods-toggle">
     <div id="methods-label">Notations</div>
     <div id="methods-body">
@@ -80,10 +88,8 @@
     </div>
   </div>
 
-  <!-- Mobile fallback -->
-  <div id="mobile-fallback">
-    <p>This visualization is best viewed on a desktop browser.</p>
-  </div>
+  <!-- Mobile fallback (unused — mobile is now fully supported) -->
+  <div id="mobile-fallback"></div>
 
   <script src="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.js"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
