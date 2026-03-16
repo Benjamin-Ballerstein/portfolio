@@ -74,7 +74,7 @@ function applyFilter(section, key) {
   if (!pinsVisible) {
     pinsVisible = true;
     map.setLayoutProperty('crash-circles', 'visibility', 'visible');
-    document.getElementById('pins-btn').textContent = 'Hide Collisions';
+    document.getElementById('pins-check').checked = true;
     document.getElementById('pins-legend').classList.add('visible');
   }
 
