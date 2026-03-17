@@ -25,7 +25,7 @@
         <line x1="27" y1="9"  x2="33" y2="9"  stroke="rgba(232,178,0,0.9)" stroke-width="2" stroke-linecap="round"/>
       </svg>DC BICYCLE COLLISION MAP 2025
     </h1>
-    <p id="title-desc"><span id="crash-num"></span> Police-reported bicycle collisions in Washington DC in 2025, mapped to the road network. <b>Press play</b> to brighten the roads where incidents cluster. Source: DC Open Data.</p>
+    <p id="title-desc"><span id="crash-num"></span> Police-reported bicycle collisions in Washington DC in 2025. Each collision brighten the roads where incidents cluster. <b>Press play to start the animation.</b></p>
   </header>
 
   <!-- Map section: map + canvas + playback controls (desktop: fixed/invisible wrapper; mobile: 60vh block) -->
@@ -82,9 +82,9 @@
   <div id="methods-toggle">
     <div id="methods-label">Notations</div>
     <div id="methods-body">
-      <p><strong>Data</strong> DC Metropolitan Police Department crash reports via <a href="https://opendata.dc.gov" target="_blank" rel="noopener">DC Open Data</a>. Includes all police-reported bicycle collisions in 2025 where a cyclist was involved. Does not capture unreported incidents.</p>
-      <p><strong>Map</strong> Crashes are snapped to the nearest road segment using DC's Roadway Block linear referencing system (DDOT). Road brightness reflects collision density; corridors within ~700 m of a crash illuminate to show dangerous routes.</p>
-      <p><strong>Audience</strong> Intended for bicycle safety advocates and planners. Filter by severity, vehicle type, lane infrastructure, or ward to identify priority corridors for intervention.</p>
+      <p><strong>Data</strong> — DC Metropolitan Police Department crash reports via <a href="https://opendata.dc.gov" target="_blank" rel="noopener">DC Open Data</a>. Includes all police-reported bicycle collisions in 2025 where a cyclist was involved. Unreported incidents are not captured.</p>
+      <p><strong>Map</strong> — Crashes are snapped to the nearest road segment using DC's roadway block linear referencing system (DDOT). Road brightness reflects collision density; corridors within ~700m of a crash illuminate to reveal high-risk routes. Fault is not attributed. Filter by severity, vehicle type, lane infrastructure, or ward to identify priority corridors for intervention. Report time may not reflect actual time of collision. Location data is approximated by DC Government.</p>
+      <p><strong>Project</strong> — Independent mapping project by Ben Ballerstein. Built with Python (data processing), QGIS (spatial enrichment with road and bike lane data), MapLibre GL (web mapping), and D3 (visualizations). Road centerlines are geometry-simplified. Front-end development and scripting guided with Claude Code. Connect on <a href="https://www.linkedin.com/in/bballerstein/" target="_blank" rel="noopener">LinkedIn</a> with questions or recommendations.</p>
     </div>
   </div>
 

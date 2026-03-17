@@ -62,7 +62,7 @@ map.on('load', async () => {
     id: 'centerlines-labels',
     type: 'symbol',
     source: 'centerlines',
-    minzoom: 14,
+    minzoom: 12,
     layout: {
       'symbol-placement': 'line',
       'text-field': ['get', 'ROUTENAME'],

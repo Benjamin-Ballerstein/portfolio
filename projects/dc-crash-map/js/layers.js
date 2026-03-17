@@ -226,7 +226,10 @@ function initCrashPins() {
     source: 'crash-pins',
     layout: { visibility: 'none' },
     paint: {
-      'circle-radius': ['case', ['boolean', ['feature-state', 'hover'], false], 7, 3],
+      'circle-radius': ['interpolate', ['linear'], ['zoom'],
+        11, ['case', ['boolean', ['feature-state', 'hover'], false], 7,  3],
+        16, ['case', ['boolean', ['feature-state', 'hover'], false], 12, 6]
+      ],
       'circle-color': '#ffffff',
       'circle-opacity': 0,
       'circle-opacity-transition': { duration: 2000, delay: 0 },

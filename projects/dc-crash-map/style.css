@@ -88,7 +88,7 @@ html, body {
 }
 
 #title-desc b {
-  color: rgba(232, 178, 0, 0.9);
+  color: rgba(227, 227, 227, 0.9);
   font-weight: 600;
 }
 
@@ -533,12 +533,14 @@ html, body {
     pointer-events: all;
     width: 100%;
     padding: 20px 20px 8px;
+    align-items: stretch;
   }
   /* 2-column layout — keep flex-direction: row, make cols equal width */
   .tally-cols-row {
     flex-direction: row;
     gap: 16px;
     flex-wrap: nowrap;
+    width: 100%;
   }
   .tally-cols-row .tally-col {
     flex: 1;
@@ -572,6 +574,11 @@ html, body {
     font-size: 12px;
     line-height: 1.65;
     color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* ── Larger play button ── */
+  #play-btn .material-symbols-outlined {
+    font-size: 33px;
   }
 
   /* ── Hide desktop-only elements ── */

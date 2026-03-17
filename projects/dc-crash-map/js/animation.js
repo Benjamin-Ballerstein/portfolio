@@ -144,10 +144,27 @@ function pause() {
 function seekTo(ms) {
   const wasPlaying = isPlaying;
   pause();
-  if (ms < animElapsed) resetVisualState();
-  animElapsed  = Math.max(0, Math.min(DURATION_MS, ms));
-  nextCrashIdx = crashes.findIndex(c => c.animMs > animElapsed);
-  if (nextCrashIdx === -1) nextCrashIdx = crashes.length;
+
+  const targetMs = Math.max(0, Math.min(DURATION_MS, ms));
+
+  if (targetMs < animElapsed) {
+    resetVisualState();
+    animElapsed  = 0;
+    nextCrashIdx = 0;
+  }
+
+  // Batch-fire all crashes up to targetMs — updates roads + tally, skips wave dots
+  while (nextCrashIdx < crashes.length && crashes[nextCrashIdx].animMs <= targetMs) {
+    const crash = crashes[nextCrashIdx];
+    updateTally(crash);
+    const [lon, lat] = crash.geometry.coordinates;
+    const nearby = findNearbySegments(lon, lat).slice(0, CLOSEST_N);
+    nearby.forEach(({ fid }) => activateSegment(fid));
+    if (nearby.length > 0) fillRoadCorridor(nearby[0].fid);
+    nextCrashIdx++;
+  }
+
+  animElapsed = targetMs;
   updateDateDisplay(animElapsed);
   if (wasPlaying) play();
 }
